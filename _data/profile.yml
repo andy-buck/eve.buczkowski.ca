@@ -1,0 +1,43 @@
+# Eve's basic info. Edit the text after the colons.
+name: Eve Buczkowski
+born: 2008
+category: U19
+disciplines: Track & Road
+team: Milton Revolution U23 Project
+school: Class of 2026
+location: Ontario, Canada
+uci_id: "101 252 659 82"
+
+# Photo shown at the top of the page. Put the file in the images folder.
+# Leave blank ("") to show the page without a photo.
+hero_photo: "hero-track-flag.jpg"
+
+# Photo shown beside the About text. Leave blank ("") for none.
+about_photo: "about-worlds-medal.jpg"
+
+# Big highlight numbers near the top of the page (keep it to 3 or 4).
+highlights:
+  - big: "World Champion"
+    small: "Points Race, 2026 UCI Junior Track Worlds"
+    rainbow: true
+  - big: "Canadian Record"
+    small: "Team Pursuit, 4:26.668"
+  - big: "Canadian Champion"
+    small: "Team Pursuit, 2026 Track Nationals"
+  - big: "2× Junior Worlds"
+    small: "Represented Canada in 2025 and 2026"
+
+about: >-
+  I am an 18-year-old Canadian U19 cyclist from Ontario, currently racing in
+  both track and road disciplines for the Milton Revolution U23 Project. As a
+  World Champion, Canadian Track Champion and National Record holder, I have
+  proudly represented Canada at the 2025 and 2026 UCI Junior Track World
+  Championships and competed in major UCI road events such as the Tour de
+  l'Abitibi Femmes, Tour du Gévaudan Occitanie femmes and In Flanders Fields.
+
+about_2: >-
+  My dual-discipline background has built a strong aerobic engine, allowing me
+  to deliver sustained power while maintaining patience and tactical awareness.
+  Above all, I am a dedicated and consistent, team-first rider who is fully
+  committed to doing the hard work, whether pacing, covering moves, or
+  protecting a leader, that creates success for the collective team.

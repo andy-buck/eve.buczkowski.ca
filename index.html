@@ -1,0 +1,187 @@
+---
+---
+{%- assign p = site.data.profile -%}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ p.name }} | {{ p.disciplines }} Cyclist</title>
+  <meta name="description" content="{{ site.description }}">
+  <meta property="og:title" content="{{ p.name }}">
+  <meta property="og:description" content="{{ site.description }}">
+  {%- if p.hero_photo != "" %}<meta property="og:image" content="{{ site.url }}/images/{{ p.hero_photo }}">{% endif %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,800;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+
+<header class="nav">
+  <a class="nav-name" href="#top">EVE<span>BUCZKOWSKI</span></a>
+  <nav>
+    <a href="#results">Results</a>
+    <a href="#power">Power</a>
+    <a href="#blog">Blog</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<section class="hero{% if p.hero_photo != '' %} has-photo{% endif %}" id="top">
+  {%- if p.hero_photo != "" %}
+  <img class="hero-photo" src="{{ '/images/' | append: p.hero_photo | relative_url }}" alt="{{ p.name }} racing">
+  {%- endif %}
+  <div class="hero-inner">
+    <p class="kicker">{{ p.category }} · {{ p.disciplines }} · {{ p.team }}</p>
+    <h1>Eve<br>Buczkowski</h1>
+    <div class="rainbow" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="hero-sub">Canadian cyclist from {{ p.location }}. Junior World Champion, national record holder and team-first rider.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#results">See results</a>
+      <a class="btn ghost" href="{{ site.substack_url }}">Read the blog</a>
+    </div>
+  </div>
+</section>
+
+<section class="highlights">
+  {%- for h in p.highlights %}
+  <div class="hl{% if h.rainbow %} rainbow-card{% endif %}">
+    <strong>{{ h.big }}</strong>
+    <span>{{ h.small }}</span>
+  </div>
+  {%- endfor %}
+</section>
+
+<section class="section" id="results">
+  <div class="section-head">
+    <h2>Results</h2>
+    <div class="filters" role="group" aria-label="Filter results">
+      <button class="on" data-f="all">All</button>
+      <button data-f="track">Track</button>
+      <button data-f="road">Road</button>
+    </div>
+  </div>
+  {%- assign by_year = site.data.results | group_by: "year" -%}
+  {%- for y in by_year %}
+  <div class="year">
+    <h3 class="year-label">{{ y.name }}</h3>
+    <div class="events">
+      {%- assign by_event = y.items | group_by: "event" -%}
+      {%- for e in by_event %}
+      <article class="event" data-d="{{ e.items[0].discipline }}">
+        <header>
+          <span class="tag {{ e.items[0].discipline }}">{{ e.items[0].discipline }}</span>
+          <h4>{{ e.name }}</h4>
+        </header>
+        <ul>
+          {%- for r in e.items %}
+          <li>
+            <span class="place p{% if r.place <= 3 %}{{ r.place }}{% endif %}">{{ r.place }}{% case r.place %}{% when 1 %}st{% when 2 %}nd{% when 3 %}rd{% else %}th{% endcase %}</span>
+            <span class="race">{{ r.race }}{% if r.note %}<em>{{ r.note }}</em>{% endif %}</span>
+          </li>
+          {%- endfor %}
+        </ul>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+  {%- endfor %}
+</section>
+
+<section class="section dark" id="power">
+  <div class="section-head">
+    <h2>Power profile</h2>
+    <p class="muted">Best efforts, {{ site.data.power.updated }}</p>
+  </div>
+  <div class="power">
+    {%- for e in site.data.power.efforts %}
+    <div class="effort">
+      <span class="dur">{{ e.duration }}</span>
+      <strong>{{ e.wkg }}<small>W/kg</small></strong>
+      <span class="watts">{{ e.watts }} W</span>
+    </div>
+    {%- endfor %}
+  </div>
+</section>
+
+{%- assign photos = site.static_files | where_exp: "f", "f.path contains '/images/gallery/'" -%}
+{%- if photos.size > 0 %}
+<section class="gallery" aria-label="Photos">
+  {%- for f in photos %}
+  <img src="{{ f.path | relative_url }}" alt="{{ f.basename | slice: 3, 100 | replace: '-', ' ' }}" loading="lazy">
+  {%- endfor %}
+</section>
+{%- endif %}
+
+<section class="section" id="blog">
+  <div class="section-head">
+    <h2>Chasing the Break</h2>
+    <p class="muted">My journey in cycling, on Substack</p>
+  </div>
+  {%- if site.data.posts.size > 0 %}
+  <div class="posts">
+    {%- for post in site.data.posts limit: 3 %}
+    <a class="post" href="{{ post.url }}">
+      {%- if post.image %}<img src="{{ post.image }}" alt="" loading="lazy">{% endif %}
+      <div>
+        <time>{{ post.date | date: "%B %-d, %Y" }}</time>
+        <h4>{{ post.title }}</h4>
+        {%- if post.subtitle %}<p>{{ post.subtitle }}</p>{% endif %}
+      </div>
+    </a>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+  <a class="btn" href="{{ site.substack_url }}">Read and subscribe</a>
+</section>
+
+<section class="section about" id="about">
+  <div>
+    <h2>About</h2>
+    <p>{{ p.about }}</p>
+    <p>{{ p.about_2 }}</p>
+  </div>
+  <aside>
+    {%- if p.about_photo and p.about_photo != "" %}
+    <img class="about-photo" src="{{ '/images/' | append: p.about_photo | relative_url }}" alt="{{ p.name }} with her World Championship gold medal" loading="lazy">
+    {%- endif %}
+    <dl class="facts">
+      <dt>Team</dt><dd>{{ p.team }}</dd>
+      <dt>Born</dt><dd>{{ p.born }}</dd>
+      <dt>Disciplines</dt><dd>{{ p.disciplines }}</dd>
+      <dt>School</dt><dd>{{ p.school }}</dd>
+      <dt>Home</dt><dd>{{ p.location }}</dd>
+      <dt>UCI ID</dt><dd>{{ p.uci_id }}</dd>
+    </dl>
+    <h3>References</h3>
+    <ul class="refs">
+      {%- for r in site.data.references %}
+      <li><strong>{{ r.name }}</strong><span>{{ r.role }}</span></li>
+      {%- endfor %}
+    </ul>
+    <p class="muted small">Contact details available on request.</p>
+  </aside>
+</section>
+
+<footer class="foot">
+  <div class="rainbow" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <p>© {{ site.time | date: "%Y" }} {{ p.name }}</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.filters button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.filters button').forEach(function (x) { x.classList.toggle('on', x === b); });
+      var f = b.dataset.f;
+      document.querySelectorAll('.event').forEach(function (ev) {
+        ev.hidden = f !== 'all' && ev.dataset.d !== f;
+      });
+      document.querySelectorAll('.year').forEach(function (yr) {
+        yr.hidden = !yr.querySelector('.event:not([hidden])');
+      });
+    });
+  });
+</script>
+</body>
+</html>

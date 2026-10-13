@@ -1,0 +1,8 @@
+title: Eve Buczkowski
+description: Canadian track & road cyclist. U19 Points Race World Champion.
+url: https://eve.buczkowski.ca
+substack_url: https://evetbuczkowski.substack.com
+exclude:
+  - README.md
+  - CLAUDE.md
+  - scripts

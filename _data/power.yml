@@ -1,0 +1,18 @@
+# Power profile. Update the numbers whenever you set a new best.
+updated: "2026"
+efforts:
+  - duration: 5 sec
+    watts: 785
+    wkg: 15.3
+  - duration: 1 min
+    watts: 411
+    wkg: 8.35
+  - duration: 5 min
+    watts: 281
+    wkg: 5.48
+  - duration: 20 min
+    watts: 234
+    wkg: 4.56
+  - duration: Est. FTP
+    watts: 222
+    wkg: 4.26

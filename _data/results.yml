@@ -1,0 +1,177 @@
+# Race results, newest first. To add a result, copy a block and change it.
+#   discipline: track or road
+#   place: finishing position as a number (1 = win)
+#   note: optional extra detail like a time or record (can be left out)
+# All results are Junior category unless a 'category' line is added.
+
+- year: 2026
+  event: "UCI Junior Track World Championships"
+  race: "Points Race"
+  discipline: track
+  place: 1
+  note: "World Champion"
+
+- year: 2026
+  event: "UCI Junior Track World Championships"
+  race: "Kilo"
+  discipline: track
+  place: 15
+  note: "1:11.374"
+
+- year: 2026
+  event: "UCI Junior Track World Championships"
+  race: "Team Pursuit"
+  discipline: track
+  place: 4
+  note: "4:26.668, Canadian Record"
+
+- year: 2026
+  event: "Tour de l'Abitibi Femmes (UCI)"
+  race: "Sprint Challenge"
+  discipline: road
+  place: 2
+
+- year: 2026
+  event: "Tour de l'Abitibi Femmes (UCI)"
+  race: "Stage 4 (ITT)"
+  discipline: road
+  place: 3
+
+- year: 2026
+  event: "Tour de l'Abitibi Femmes (UCI)"
+  race: "Stage 3"
+  discipline: road
+  place: 15
+
+- year: 2026
+  event: "Tour de l'Abitibi Femmes (UCI)"
+  race: "Stage 2"
+  discipline: road
+  place: 5
+
+- year: 2026
+  event: "Tour de l'Abitibi Femmes (UCI)"
+  race: "Stage 1"
+  discipline: road
+  place: 3
+
+- year: 2026
+  event: "Coupe de l'Avenir"
+  race: "GC"
+  discipline: road
+  place: 9
+
+- year: 2026
+  event: "Coupe de l'Avenir"
+  race: "Stage 4"
+  discipline: road
+  place: 4
+
+- year: 2026
+  event: "Coupe de l'Avenir"
+  race: "Stage 3"
+  discipline: road
+  place: 5
+
+- year: 2026
+  event: "Coupe de l'Avenir"
+  race: "Stage 2"
+  discipline: road
+  place: 10
+
+- year: 2026
+  event: "Coupe de l'Avenir"
+  race: "Stage 1"
+  discipline: road
+  place: 6
+
+- year: 2026
+  event: "Canadian Road Nationals"
+  race: "Criterium"
+  discipline: road
+  place: 4
+
+- year: 2026
+  event: "Canadian Road Nationals"
+  race: "Road Race"
+  discipline: road
+  place: 7
+
+- year: 2026
+  event: "Canadian Road Nationals"
+  race: "ITT"
+  discipline: road
+  place: 4
+
+- year: 2026
+  event: "GP Charlevoix"
+  race: "GC"
+  discipline: road
+  place: 4
+
+- year: 2026
+  event: "Canadian Track Nationals"
+  race: "Individual Pursuit"
+  discipline: track
+  place: 3
+
+- year: 2026
+  event: "Canadian Track Nationals"
+  race: "Points Race"
+  discipline: track
+  place: 2
+
+- year: 2026
+  event: "Canadian Track Nationals"
+  race: "Elimination"
+  discipline: track
+  place: 2
+
+- year: 2026
+  event: "Canadian Track Nationals"
+  race: "Kilo"
+  discipline: track
+  place: 2
+
+- year: 2026
+  event: "Canadian Track Nationals"
+  race: "Team Pursuit"
+  discipline: track
+  place: 1
+  note: "Canadian Champion"
+
+- year: 2026
+  event: "Canadian Track Nationals"
+  race: "Madison"
+  discipline: track
+  place: 3
+
+- year: 2025
+  event: "Canadian Road Nationals"
+  race: "ITT"
+  discipline: road
+  place: 6
+
+- year: 2025
+  event: "Canadian Road Nationals"
+  race: "Road Race"
+  discipline: road
+  place: 4
+
+- year: 2025
+  event: "UCI Junior Track World Championships"
+  race: "Individual Pursuit"
+  discipline: track
+  place: 13
+
+- year: 2025
+  event: "Tour de l'Abitibi Femmes (UCI)"
+  race: "GC"
+  discipline: road
+  place: 7
+
+- year: 2025
+  event: "Tour de l'Abitibi Femmes (UCI)"
+  race: "Stage 4 (ITT)"
+  discipline: road
+  place: 3
