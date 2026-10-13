@@ -149,6 +149,7 @@ h1, h2, h3, h4 { font-family: var(--head); line-height: 1; margin: 0; text-trans
 .post time { font-size: 13px; color: var(--muted); }
 .post h4 { font-size: 24px; font-weight: 600; text-transform: none; margin: 6px 0; }
 .post p { margin: 0; color: var(--muted); font-size: 15px; }
+.read-more { display: inline-block; margin-top: 10px; font: 600 14px var(--head); letter-spacing: .1em; text-transform: uppercase; color: var(--red); }
 
 /* About */
 .about { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; border-top: 1px solid var(--line); }
