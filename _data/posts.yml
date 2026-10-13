@@ -1,4 +1,4 @@
-# Latest Substack posts, newest first. Filled in automatically when the sync works; can also be edited by hand.
+# Filled in automatically from Substack when the sync works. Can also be edited by hand.
 [
   {
     "title": "Mid Season Update!",
@@ -20,5 +20,26 @@
     "date": "2026-03-12",
     "subtitle": "A look into what my year has looked like so far and what's to come!",
     "image": "https://substackcdn.com/image/fetch/$s_!ppY_!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F11c3904a-7758-46b2-af50-f9e1dd231f8d_1912x1530.jpeg"
+  },
+  {
+    "title": "My year in review!",
+    "url": "https://evetbuczkowski.substack.com/p/my-year-in-review",
+    "date": "2026-01-17",
+    "subtitle": "A 2025 cycling season full of growth.",
+    "image": "https://substackcdn.com/image/fetch/$s_!h44V!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F100947f5-5c41-418d-9f38-219cbfd3813c_2820x2820.jpeg"
+  },
+  {
+    "title": "Junior Track World Championships!",
+    "url": "https://evetbuczkowski.substack.com/p/junior-track-world-championships",
+    "date": "2025-09-22",
+    "subtitle": "My Worlds Recap and What's Next!",
+    "image": "https://substackcdn.com/image/fetch/$s_!95x-!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2b98c380-532e-4a26-b6ba-6acc62d1bba4_1752x1314.jpeg"
+  },
+  {
+    "title": "Monthly Recap: June - July 2025",
+    "url": "https://evetbuczkowski.substack.com/p/monthly-recap-june-july-2025",
+    "date": "2025-07-29",
+    "subtitle": "MEGA UPDATE! Nationals, Montreal, Stage Racing, Crit Dawgin'. Only 1 week until training camp for Worlds starts!",
+    "image": "https://substackcdn.com/image/fetch/$s_!LvUn!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faa8726ad-ab6c-4a0c-81b0-c8ce619d0b58_4939x3339.jpeg"
   }
 ]

@@ -13,11 +13,12 @@ Eve is not a programmer. Keep changes small and in the content files.
 - `_data/references.yml`: names and roles only. Never add phone numbers or
   emails for references.
 - `images/gallery/`: every image in here shows in the gallery automatically.
-- `_data/posts.yml`: the latest Substack posts shown on the homepage. The
-  publish workflow tries to refresh it from Substack, but Substack often blocks
-  GitHub's servers, so it may need adding by hand: a JSON list of
-  `{"title", "url", "date": "YYYY-MM-DD", "subtitle", "image"}`, newest first.
-  The sync only overwrites it when it succeeds.
+- `_data/posts.yml`: the latest Substack posts shown on the homepage. Rebuilt
+  on every publish by `scripts/fetch_substack.py` from the live feed, or from
+  `_substack/feed.xml` when Substack blocks GitHub (it usually does). To pick up
+  a new post, run `scripts/update-blog.sh` from a home computer, or replace
+  `_substack/feed.xml` with a copy of https://evetbuczkowski.substack.com/feed.
+  Don't edit `posts.yml` by hand; the next publish overwrites it.
 
 ## Rules
 - Prefer editing `_data/*.yml` over `index.html` or `assets/css/site.css`.

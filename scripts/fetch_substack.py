@@ -3,22 +3,23 @@
 Runs on every publish and once a night, from .github/workflows/pages.yml.
 Uses only the Python standard library.
 
-Substack sometimes blocks requests from GitHub's servers, so if reading the
-feed directly fails it tries Substack's archive API, then the free rss2json.com
-relay. If all fail, _data/posts.yml is left as it is (it can be edited by hand).
+Substack blocks requests from GitHub's servers, so if reading the feed live
+fails it uses the copy saved in _substack/feed.xml by scripts/update-blog.sh
+(run from a home computer, where Substack doesn't block). If both fail,
+_data/posts.yml is left as it is (it can be edited by hand).
 """
 import json
 import re
 import sys
-import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 FEED = "https://evetbuczkowski.substack.com/feed"
-RELAY = "https://api.rss2json.com/v1/api.json?rss_url=" + urllib.parse.quote(FEED, safe="")
-OUT = Path(__file__).resolve().parent.parent / "_data" / "posts.yml"
+ROOT = Path(__file__).resolve().parent.parent
+SAVED_FEED = ROOT / "_substack" / "feed.xml"
+OUT = ROOT / "_data" / "posts.yml"
 MAX_POSTS = 6
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
@@ -36,8 +37,9 @@ def strip_html(text):
     return re.sub(r"<[^>]+>", "", text or "").strip() or None
 
 
-def from_feed():
-    root = ET.fromstring(get(FEED))
+def parse_feed(raw):
+    # A feed saved from a browser can have a note in front of the XML; skip it.
+    root = ET.fromstring(raw[raw.find(b"<rss"):])
     posts = []
     for item in root.iter("item"):
         enclosure = item.find("enclosure")
@@ -51,31 +53,15 @@ def from_feed():
     return posts
 
 
-def from_archive_api():
-    data = json.loads(get("https://evetbuczkowski.substack.com/api/v1/archive?sort=new&limit=12"))
-    return [{
-        "title": post["title"].strip(),
-        "url": post["canonical_url"],
-        "date": post["post_date"][:10],
-        "subtitle": post.get("subtitle") or None,
-        "image": post.get("cover_image") or None,
-    } for post in data if post.get("audience", "everyone") in ("everyone", "only_free")]
+def live_feed():
+    return parse_feed(get(FEED))
 
 
-def from_relay():
-    data = json.loads(get(RELAY))
-    if data.get("status") != "ok":
-        raise RuntimeError(data.get("message", "relay error"))
-    return [{
-        "title": item["title"].strip(),
-        "url": item["link"],
-        "date": item["pubDate"][:10],
-        "subtitle": strip_html(item.get("description")),
-        "image": (item.get("enclosure") or {}).get("link") or item.get("thumbnail") or None,
-    } for item in data["items"]]
+def saved_feed():
+    return parse_feed(SAVED_FEED.read_bytes())
 
 
-for source in (from_feed, from_archive_api, from_relay):
+for source in (live_feed, saved_feed):
     try:
         posts = source()[:MAX_POSTS]
         break
