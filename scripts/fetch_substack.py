@@ -4,7 +4,8 @@ Runs on every publish and once a night, from .github/workflows/pages.yml.
 Uses only the Python standard library.
 
 Substack sometimes blocks requests from GitHub's servers, so if reading the
-feed directly fails it falls back to the free rss2json.com relay. If both
+feed directly fails it tries Substack's archive API, then the free rss2json.com
+relay. If both
 fail, the posts from the last successful run are kept.
 """
 import json
@@ -51,6 +52,17 @@ def from_feed():
     return posts
 
 
+def from_archive_api():
+    data = json.loads(get("https://evetbuczkowski.substack.com/api/v1/archive?sort=new&limit=12"))
+    return [{
+        "title": post["title"].strip(),
+        "url": post["canonical_url"],
+        "date": post["post_date"][:10],
+        "subtitle": post.get("subtitle") or None,
+        "image": post.get("cover_image") or None,
+    } for post in data if post.get("audience", "everyone") in ("everyone", "only_free")]
+
+
 def from_relay():
     data = json.loads(get(RELAY))
     if data.get("status") != "ok":
@@ -64,7 +76,7 @@ def from_relay():
     } for item in data["items"]]
 
 
-for source in (from_feed, from_relay):
+for source in (from_feed, from_archive_api, from_relay):
     try:
         posts = source()[:MAX_POSTS]
         break
