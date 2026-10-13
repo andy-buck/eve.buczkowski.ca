@@ -1,15 +1,24 @@
 # Latest Substack posts, newest first. Filled in automatically when the sync works; can also be edited by hand.
 [
   {
-    "title": "Mid-Season Update",
-    "url": "https://evetbuczkowski.substack.com/p/mid-season-update"
+    "title": "Mid Season Update!",
+    "url": "https://evetbuczkowski.substack.com/p/mid-season-update",
+    "date": "2026-07-23",
+    "subtitle": "Charlevoix, Nationals, Coupe de l'Avenir & Tour de l'Abitibi Femmes",
+    "image": "https://substackcdn.com/image/fetch/$s_!1Ank!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F21d0b13d-a52a-421f-96c8-5336c8feb9da_2560x1707.webp"
   },
   {
-    "title": "March and April Update",
-    "url": "https://evetbuczkowski.substack.com/p/march-and-april-update"
+    "title": "March and April Update!",
+    "url": "https://evetbuczkowski.substack.com/p/march-and-april-update",
+    "date": "2026-05-12",
+    "subtitle": "Canadian Track Nationals Recap + More!",
+    "image": "https://substackcdn.com/image/fetch/$s_!D1SP!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F72ccb37e-999a-4e57-91cf-1e94d1bcf1ac_1086x724.jpeg"
   },
   {
-    "title": "First Months of 2026",
-    "url": "https://evetbuczkowski.substack.com/p/first-months-of-2026"
+    "title": "First Months of 2026!",
+    "url": "https://evetbuczkowski.substack.com/p/first-months-of-2026",
+    "date": "2026-03-12",
+    "subtitle": "A look into what my year has looked like so far and what's to come!",
+    "image": "https://substackcdn.com/image/fetch/$s_!ppY_!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F11c3904a-7758-46b2-af50-f9e1dd231f8d_1912x1530.jpeg"
   }
 ]
