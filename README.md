@@ -15,7 +15,7 @@ You never need to touch the design files.
 | Bio, team, highlight boxes, top photo | `_data/profile.yml` |
 | References | `_data/references.yml` |
 | Photo gallery | Add or delete photos in `images/gallery/` |
-| Blog posts | Nothing to do. New Substack posts appear by themselves overnight. |
+| Blog posts on the homepage | Ask Claude to "add my new Substack post" (Substack blocks the automatic sync from GitHub) |
 
 **With an AI assistant:** open this repo in Claude (claude.ai/code) and ask in
 plain words, like *"Add 2nd in the Ontario Cup road race, May 2027"* or

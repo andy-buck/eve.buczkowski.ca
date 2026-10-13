@@ -5,8 +5,7 @@ Uses only the Python standard library.
 
 Substack sometimes blocks requests from GitHub's servers, so if reading the
 feed directly fails it tries Substack's archive API, then the free rss2json.com
-relay. If both
-fail, the posts from the last successful run are kept.
+relay. If all fail, _data/posts.yml is left as it is (it can be edited by hand).
 """
 import json
 import re
@@ -87,6 +86,6 @@ else:
     sys.exit(0)
 
 # JSON is valid YAML, and avoids needing a YAML library.
-OUT.write_text("# Filled in automatically from Substack each time the site publishes. No need to edit.\n"
+OUT.write_text("# Filled in automatically from Substack when the sync works. Can also be edited by hand.\n"
                + json.dumps(posts, indent=2, ensure_ascii=False) + "\n")
 print(f"Wrote {len(posts)} posts")

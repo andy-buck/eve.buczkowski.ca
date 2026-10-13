@@ -13,7 +13,11 @@ Eve is not a programmer. Keep changes small and in the content files.
 - `_data/references.yml`: names and roles only. Never add phone numbers or
   emails for references.
 - `images/gallery/`: every image in here shows in the gallery automatically.
-- `_data/posts.yml`: written automatically from Substack. Don't edit it.
+- `_data/posts.yml`: the latest Substack posts shown on the homepage. The
+  publish workflow tries to refresh it from Substack, but Substack often blocks
+  GitHub's servers, so it may need adding by hand: a JSON list of
+  `{"title", "url", "date": "YYYY-MM-DD", "subtitle", "image"}`, newest first.
+  The sync only overwrites it when it succeeds.
 
 ## Rules
 - Prefer editing `_data/*.yml` over `index.html` or `assets/css/site.css`.
