@@ -2,40 +2,77 @@
 
 Runs on every publish and once a night, from .github/workflows/pages.yml.
 Uses only the Python standard library.
+
+Substack sometimes blocks requests from GitHub's servers, so if reading the
+feed directly fails it falls back to the free rss2json.com relay. If both
+fail, the posts from the last successful run are kept.
 """
 import json
 import re
 import sys
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 FEED = "https://evetbuczkowski.substack.com/feed"
+RELAY = "https://api.rss2json.com/v1/api.json?rss_url=" + urllib.parse.quote(FEED, safe="")
 OUT = Path(__file__).resolve().parent.parent / "_data" / "posts.yml"
 MAX_POSTS = 6
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/126.0 Safari/537.36",
+    "Accept": "application/rss+xml, application/xml;q=0.9, */*;q=0.8",
+}
 
-req = urllib.request.Request(FEED, headers={"User-Agent": "eve.buczkowski.ca feed sync"})
-try:
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        root = ET.fromstring(resp.read())
-except Exception as err:  # keep the old posts if Substack is unreachable
-    print(f"Could not read feed, leaving posts unchanged: {err}")
-    sys.exit(0)
 
-posts = []
-for item in root.iter("item"):
-    enclosure = item.find("enclosure")
-    subtitle = re.sub(r"<[^>]+>", "", item.findtext("description") or "").strip()
-    posts.append({
-        "title": (item.findtext("title") or "").strip(),
-        "url": (item.findtext("link") or "").strip(),
-        "date": parsedate_to_datetime(item.findtext("pubDate")).strftime("%Y-%m-%d"),
-        "subtitle": subtitle or None,
-        "image": enclosure.get("url") if enclosure is not None else None,
-    })
-    if len(posts) == MAX_POSTS:
+def get(url):
+    with urllib.request.urlopen(urllib.request.Request(url, headers=HEADERS), timeout=30) as resp:
+        return resp.read()
+
+
+def strip_html(text):
+    return re.sub(r"<[^>]+>", "", text or "").strip() or None
+
+
+def from_feed():
+    root = ET.fromstring(get(FEED))
+    posts = []
+    for item in root.iter("item"):
+        enclosure = item.find("enclosure")
+        posts.append({
+            "title": (item.findtext("title") or "").strip(),
+            "url": (item.findtext("link") or "").strip(),
+            "date": parsedate_to_datetime(item.findtext("pubDate")).strftime("%Y-%m-%d"),
+            "subtitle": strip_html(item.findtext("description")),
+            "image": enclosure.get("url") if enclosure is not None else None,
+        })
+    return posts
+
+
+def from_relay():
+    data = json.loads(get(RELAY))
+    if data.get("status") != "ok":
+        raise RuntimeError(data.get("message", "relay error"))
+    return [{
+        "title": item["title"].strip(),
+        "url": item["link"],
+        "date": item["pubDate"][:10],
+        "subtitle": strip_html(item.get("description")),
+        "image": (item.get("enclosure") or {}).get("link") or item.get("thumbnail") or None,
+    } for item in data["items"]]
+
+
+for source in (from_feed, from_relay):
+    try:
+        posts = source()[:MAX_POSTS]
         break
+    except Exception as err:
+        print(f"{source.__name__} failed: {err}")
+else:
+    print("Could not read Substack, leaving posts unchanged")
+    sys.exit(0)
 
 # JSON is valid YAML, and avoids needing a YAML library.
 OUT.write_text("# Filled in automatically from Substack each time the site publishes. No need to edit.\n"

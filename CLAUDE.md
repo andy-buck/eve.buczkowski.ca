@@ -16,7 +16,7 @@ Eve is not a programmer. Keep changes small and in the content files.
 - `_data/posts.yml`: written automatically from Substack. Don't edit it.
 
 ## Rules
-- Prefer editing `_data/*.yml` over `index.html` or `assets/css/style.css`.
+- Prefer editing `_data/*.yml` over `index.html` or `assets/css/site.css`.
   Only change the design when Eve asks for a design change.
 - Keep YAML valid: quote text containing a colon, like `note: "1:11.374"`.
 - Before committing, build to check nothing broke: `jekyll build` (Jekyll 3.x

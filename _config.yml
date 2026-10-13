@@ -6,3 +6,5 @@ exclude:
   - README.md
   - CLAUDE.md
   - scripts
+# Don't wrap the page in GitHub's default theme; the design is in index.html.
+theme: null
